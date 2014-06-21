@@ -1,0 +1,15 @@
+[user]
+	name = y.urakawa
+	email = s08a2015@gmail.com
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = /usr/local/bin/vim
+[push]
+	default = simple
+[alias]
+	st = status
+[pager]
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
+
