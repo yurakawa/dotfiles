@@ -1,17 +1,17 @@
 "---------------------------------------------------------------------------
-"" plugin - NeoBundle(mac)
-if !1 | finish | endif
+" neobundle settings
 if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
+  set nocompatible
+  " neobundle をインストールしていない場合は自動インストール
+  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+    echo "install neobundle..."
+    " vim からコマンド呼び出しているだけ neobundle.vim のクローン
+    :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
   endif
-
-  " Required:
+  " runtimepath の追加は必須
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 " " Let NeoBundle manage NeoBundle
 " Required:
@@ -55,6 +55,8 @@ call neobundle#end()
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
+
+
 " ---------------------------------------------------------------------------
 " color settings
 colorscheme darkblue
