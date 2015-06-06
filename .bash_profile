@@ -18,3 +18,7 @@ fi
 # if [ -e ~/script/script.sh ]; then
 #     ~/script/script.sh
 # fi
+
+if which rbenv > /dev/null; then
+  eval "$(rbenv init -)"
+fi
