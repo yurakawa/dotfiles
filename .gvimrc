@@ -1,12 +1,14 @@
 " ---------------------------------------------------------------------------
 " カラー設定:
-colorscheme darkblue
+colorscheme solarized
 " ---------------------------------------------------------------------------
 " フォント設定:
 if has('win32') || has('win64')
   set guifont=MS_Gothic:h9:cSHIFTJIS
 elseif has('mac')
-  set guifont=Osaka－等幅:h14
+  set guifont=Andale\ Mono:h14
+  set guifontwide=ヒラギノ角ゴ\ StdN\ W8:h14
+
 elseif has('xfontset')
   set guifontset=a14,r14,k14
 endif
@@ -19,7 +21,7 @@ set columns=96
 set lines=80
 " コマンドラインの高さ(GUI使用時)
 " ウインドウの透明さ
-set transparency=10
+set transparency=3
 " ---------------------------------------------------------------------------
 " ツールバー非表示
 set guioptions-=T
@@ -46,3 +48,5 @@ nnoremap <C-Tab>   gt
 nnoremap <C-S-Tab> gT
 
 " ---------------------------------------------------------------------------
+"挿入モードから抜ける/入る際にIMEがオフにする。for Kaoriya版
+set imdisable
