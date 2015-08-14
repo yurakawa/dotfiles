@@ -20,6 +20,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
+NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'glidenote/memolist.vim'
@@ -38,7 +39,7 @@ NeoBundle 'Townk/vim-autoclose'
 " NeoBundle 'thinca/vim-ref'
 " NeoBundle 'tpope/vim-endwise'
 " NeoBundle 'vim-scripts/ruby-matchit'
-" NeoBundle 'scrooloose/syntastic'                              j
+" NeoBundle 'scrooloose/syntastic'
 
 " vim color scheme
 " NeoBundle 'nanotech/jellybeans.vim'
@@ -376,3 +377,7 @@ let g:memolist_qfixgrep = 1
 "for easy-align
 vnoremap <silent><Enter> :EasyAlign<cr>
 " ---------------------------------------------------------------------------
+"for incsearch-fuzzy
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)

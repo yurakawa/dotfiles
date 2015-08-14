@@ -14,8 +14,8 @@ unset color_prompt force_color_prompt
 
 
 # alias
-alias ls='ls -G'
-alias ll='ls -alFG'
+alias ls='ls --color'
+alias ll='ls -al --color'
 alias rmigc='bundle exec rake db:migrate db:test:clone'
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
@@ -31,23 +31,6 @@ if [[ -n "$PS1" ]]; then
         return $s
     }
 fi
-
-# cowsay
-function random_cowsay() {
-    # Only brew user!
-    # If you are not brew user, change 'COWS' path
-    COWS=`brew --prefix`/Cellar/cowsay/3.03/share/cows
-    NBRE_COWS=$(ls -1 $COWS | wc -l)
-    COWS_RANDOM=$(expr $RANDOM % $NBRE_COWS + 1)
-    COW_NAME=$(ls -1 $COWS | awk -F\. -v COWS_RANDOM_AWK=$COWS_RANDOM 'NR == COWS_RANDOM_AWK {print $1}')
-    cowsay -f $COW_NAME "`Fortune -s`"
-}
-if which fortune cowsay >/dev/null; then
-    while :
-    do
-        random_cowsay 2>/dev/null && break
-    done
-fi && unset -f random_cowsay
 
 # bash_completion 
 if [ -f `brew --prefix`/etc/bash_completion ]; then

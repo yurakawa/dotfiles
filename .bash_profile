@@ -10,6 +10,7 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/android-sdk-macosx/platform-tools:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
@@ -22,3 +23,8 @@ fi
 if which rbenv > /dev/null; then
   eval "$(rbenv init -)"
 fi
+
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
+fi
+
