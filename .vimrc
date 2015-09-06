@@ -32,7 +32,7 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/neocomplcache'
 "NeoBundle 'Shougo/neosnippet.git'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'OmniSharp/omnisharp-vim'
+"NeoBundle 'OmniSharp/omnisharp-vim'
 NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'Townk/vim-autoclose'
 
