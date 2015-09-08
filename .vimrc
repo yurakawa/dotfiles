@@ -57,16 +57,13 @@ call neobundle#end()
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-
 " ---------------------------------------------------------------------------
 " color settings
 colorscheme darkblue
-
 " ---------------------------------------------------------------------------
 filetype plugin indent on
 filetype indent on
 syntax enable
-
 "---------------------------------------------------------------------------
 " 検索に関する設定:
 "
@@ -78,7 +75,6 @@ set smartcase
 set incsearch
 " 検索パターンのマッチ箇所の強調表示
 set hlsearch
-
 
 "---------------------------------------------------------------------------
 " 編集に関する設定:
@@ -108,11 +104,12 @@ set formatoptions+=mM
 "行頭の余白内でTabを打ち込むと、'shiftwidth'の数だけインデントする
 set smarttab
 "モードライン
-"set modeline
+set modeline
 "Ctrl+aで8進数の計算をさせない
-"set nrformats-=octal
+set nrformats-=octal
 "タブ・スペース表示
 "set lcs=tab:>.,trail:_,extends:\
+"
 "---------------------------------------------------------------------------
 " GUI固有ではない画面表示の設定:
 "
@@ -134,14 +131,11 @@ set showcmd
 set title
 " 現在のモードの表示
 set showmode
-
 set display=lastline
 " 補完表示数
 set pumheight=10
-
 "折りたたみ有効化
 set foldmethod=marker
-
 
 "---------------------------------------------------------------------------
 " vimdiffの色設定
@@ -171,14 +165,13 @@ if executable(g:git_diff_normal)
   endif
 endif
 
-"---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 " ファイル操作に関する設定:
 
 " バックアップファイルの生成先変更
 set backupdir=/var/tmp
 " swapファイルの生成先変更
 set directory=/var/tmp
-
 " .unファイルの生成先変更
 set noundofile
 
@@ -207,18 +200,14 @@ set whichwrap=b,s,h,l,<,>,[,],~
 set ambiwidth=double
 nnoremap n nzz
 nnoremap N Nzz
-
 nnoremap Y y$
 
 " ---------------------------------------------------------------------------
 " .vimを<space><dot>
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
-"
 " ---------------------------------------------------------------------------
-
 map <F2> :v/\d\d:\d0/d<kEnter>:sort<kEnter>:%s/Mbps//g<kEnter>gg8w
 " ---------------------------------------------------------------------------
-
 set virtualedit+=all
 " ---------------------------------------------------------------------------
 
