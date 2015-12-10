@@ -14,17 +14,19 @@ unset color_prompt force_color_prompt
 
 
 case "${OSTYPE}" in
-darwin*)
-  alias ls="ls -G"
-  alias ll="ls -alG"
-  alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
-  alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-  alias rmigc='bundle exec rake db:migrate db:test:clone'
-  ;;
-linux*)
-  alias ls='ls --color'
-  alias ll='ls -la --color'
-  ;;
+  darwin*)
+    #alias ls="ls -G"
+    #alias ll="ls -alG"
+    alias ls='ls --color'
+    alias ll='ls -la --color'
+    alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+    alias rmigc='bundle exec rake db:migrate db:test:clone'
+    ;;
+  linux*)
+    alias ls='ls --color'
+    alias ll='ls -la --color'
+    ;;
 esac
 
 
