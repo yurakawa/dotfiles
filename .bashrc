@@ -19,7 +19,8 @@ case "${OSTYPE}" in
     #alias ll="ls -alG"
     alias ls='ls --color'
     alias ll='ls -la --color'
-    alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+    #alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+    alias vi='/usr/local/bin/mvim'
     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias rmigc='bundle exec rake db:migrate db:test:clone'
     ;;
@@ -28,7 +29,6 @@ case "${OSTYPE}" in
     alias ll='ls -la --color'
     ;;
 esac
-
 
 # make a cd history of the absolute path
 if [[ -n "$PS1" ]]; then

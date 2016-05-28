@@ -1,85 +1,116 @@
-"---------------------------------------------------------------------------
-" neobundle settings
-if has('vim_starting')
-  set nocompatible
-  " neobundle をインストールしていない場合は自動インストール
-  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
-    echo "install neobundle..."
-    " vim からコマンド呼び出しているだけ neobundle.vim のクローン
-    :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
-  endif
-  " runtimepath の追加は必須
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+" dein.vim {{{
+if &compatible
+  set nocompatible               " Be iMproved
 endif
-call neobundle#begin(expand('~/.vim/bundle'))
 
-" " Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Prepare .vim dir
+let s:vimdir = $HOME . "/.vim"
+if has("vim_starting")
+  if ! isdirectory(s:vimdir)
+    call system("mkdir " . s:vimdir)
+  endif
+endif
 
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-NeoBundle 'haya14busa/incsearch.vim'
-NeoBundle 'bronson/vim-trailing-whitespace'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler'
-"NeoBundle 'Shougo/vimproc'
+" Set dein paths
+let s:dein_dir = s:vimdir
+let s:dein_github = s:dein_dir . '/repos/github.com'
+let s:dein_repo_name = "Shougo/dein.vim"
+let s:dein_repo_dir = s:dein_github . '/' . s:dein_repo_name
 
-" コード補完
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'marcus/rsense'
-NeoBundle 'supermomonga/neocomplete-rsense.vim'
-"NeoBundle 'Shougo/neocomplcache'
+" Check dein has been installed or not.
+if !isdirectory(s:dein_repo_dir)
+  echo "dein is not installed, install now "
+  let s:dein_repo = "https://github.com/" . s:dein_repo_name
+  echo "git clone " . s:dein_repo . " " . s:dein_repo_dir
+  call system("git clone " . s:dein_repo . " " . s:dein_repo_dir)
+endif
 
-" 静的解析
-NeoBundle 'scrooloose/syntastic'
+let &runtimepath = &runtimepath . "," . s:dein_repo_dir
 
-" ドキュメント参照
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'yuku-t/vim-ref-ri'
+" Begin plugin part
+"call dein#begin(expand('~/.vim/dein'))
+call dein#begin(expand('~/.cache/dein'))
 
-" " メソッド定義元へのジャンプ
-NeoBundle 'szw/vim-tags'
+call dein#add('Shougo/dein.vim')
+"call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+"call dein#add('Shougo/unite.vim', {
+"      \ 'depends': ['vimproc'],
+"      \ 'on_cmd': ['Unite'],
+"      \ 'lazy': 1})
+"if has('lua')
+"  call dein#add('Shougo/neocomplete.vim', {
+"        \ 'on_i': 1,
+"        \ 'lazy': 1})
+"  call dein#add('ujihisa/neco-look', {
+"        \ 'depends': ['neocomplete.vim']})
+"endif
+call dein#add('bronson/vim-trailing-whitespace')
+call dein#add('junegunn/vim-easy-align')
+call dein#add('glidenote/memolist.vim')
+call dein#add('Shougo/vimfiler')
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('marcus/rsense')
+call dein#add('scrooloose/syntastic')
+call dein#add('tpope/vim-endwise')
+call dein#add('elzr/vim-json')
+call dein#add('altercation/vim-colors-solarized')
 
-" " 自動で閉じる
-NeoBundle 'tpope/vim-endwise'
+call dein#add('tomasr/molokai')
+call dein#add('nathanaelkane/vim-indent-guides')
+call dein#add('scrooloose/nerdtree')
+call dein#add('t9md/vim-quickhl')
+call dein#add('tpope/vim-surround')
+call dein#end()
 
+" Installation check.
+if dein#check_install()
+  call dein#install()
+endif
 
-"NeoBundle 'Shougo/neosnippet.git'
-NeoBundle 'thinca/vim-quickrun'
-"NeoBundle 'OmniSharp/omnisharp-vim'
-NeoBundle 'Rip-Rip/clang_complete'
-NeoBundle 'Townk/vim-autoclose'
+"}}}
+" Plugins {{{
+" Molokai Color Scheme {{{
 
-" NeoBundle 'vim-scripts/ruby-matchit'
+let g:molokai_original = 1
+let g:rehash256 = 1
+colorscheme molokai
+set t_Co=256
+"}}}
+" Indent Guides  {{{
+" vim-indent-guides
+" Vim 起動時 vim-indent-guides を自動起動
+let g:indent_guides_enable_on_vim_startup=1
+" ガイドをスタートするインデントの量
+let g:indent_guides_start_level=2
+" 自動カラー無効
+let g:indent_guides_auto_colors=0
+" 奇数番目のインデントの色
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#444433 ctermbg=black
+" 偶数番目のインデントの色
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333344 ctermbg=darkgray
+" ガイドの幅
+let g:indent_guides_guide_size = 1
+"}}}
+" NERDTree {{{
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+"}}}
+" Vim-quickhi {{{
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+"}}}
+" Memolist settings "{{{
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
 
-" vim color scheme
-" NeoBundle 'nanotech/jellybeans.vim'
-" NeoBundle 'w0ng/vim-hybrid'
-" NeoBundle 'vim-scripts/twilight'
-" NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'altercation/vim-colors-solarized'
-" NeoBundle 'vim-scripts/Wombat'
-" NeoBundle 'tomasr/molokai'
-" NeoBundle 'vim-scripts/rdark'
-
-call neobundle#end()
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-
-" -------------------------------
-" color settings
-colorscheme darkblue
-"
-" --------------------------------
-" 基本設定
-" --------------------------------
+let g:memolist_memo_suffix = "md"
+let g:memolist_memo_date = "%Y-%m-%d %H:%M"
+let g:memolist_qfixgrep = 1
+"}}}
+"}}}
+" Base settings {{{
 " vim内部で使われる文字コードを設定する
 set encoding=utf-8
 " ファイル書き込み時の文字コードを設定する
@@ -96,10 +127,8 @@ syntax enable
 " ファイル形式別プラグインのロードを有効化する
 " ファイル形式別インデントのロードを有効化する
 filetype plugin indent on
-
-" --------------------------------
-" 検索設定
-" --------------------------------
+"}}}
+" Search Settings {{{
 " 検索時に大文字小文字を無視 (ignorecase:無視する noignorecase:無視しない)
 set noignorecase
 " 大文字小文字の両方が含まれている場合は大文字小文字を区別 (smartcase:有効 nosmartcase:無効)
@@ -108,11 +137,8 @@ set smartcase
 set incsearch
 " 検索パターンのマッチ箇所の強調表示
 set hlsearch
-
-
-" --------------------------------
-" 編集設定
-" --------------------------------
+"}}}
+" Edit settings {{{
 " タブの画面上での幅
 set tabstop=2
 " インデントの各段階に使われる空白の数。
@@ -144,11 +170,9 @@ set modeline
 set nrformats-=octal
 "タブ・スペース表示
 "set lcs=tab:>.,trail:_,extends:\
-
-"---------------------------------
-" 画面表示設定
-" --------------------------------
-" 行番号を表示 (number:有効 nonumber:無効)
+" }}}
+" Visual Settings {{{
+" 行番号を表示 (number:有効 nonumber:無効)                                   s
 set number
 " ルーラーを表示 (noruler:非表示)
 set ruler
@@ -171,10 +195,8 @@ set display=lastline
 set pumheight=10
 "折りたたみ有効化
 set foldmethod=marker
-
-" --------------------------------
-" vimdiffの色設定
-" --------------------------------
+" }}}
+" Vimdiff settings {{{
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
@@ -200,10 +222,8 @@ if executable(g:git_diff_normal)
     set diffexpr=GitDiffNormal()
   endif
 endif
-
-" --------------------------------
-" ファイル操作に関する設定:
-" --------------------------------
+" }}}
+" BackupFile Settings {{{
 
 " バックアップファイルの生成先変更
 set backupdir=/var/tmp
@@ -211,6 +231,8 @@ set backupdir=/var/tmp
 set directory=/var/tmp
 " .unファイルの生成先変更
 set noundofile
+" }}}
+"
 
 "---------------------------------------------------------------------------
 "挿入モード終了時にIME状態を保存しない
@@ -266,20 +288,6 @@ endfunction
 set statusline=%y%{GetStatusEx()}%F%m%r%=<%c:%l>
 
 " --------------------------------
-" quickrun
-" --------------------------------
-let g:quickrun_config = get(g:, 'quickrun_config', {})
-" vimproc を使って非同期に実行し，結果を quickfix に出力する
-let g:quickrun_config._ = {
-            \ 'outputter' : 'quickfix',
-            \ 'runner' : 'vimproc'
-            \ }
-let g:quickrun_config.cpp = {
-            \ 'command' : 'clang++',
-            \ 'cmdopt' : '-std=c++1y -Wall -Wextra',
-            \ }
-
-" --------------------------------
 " neocomplete.vim
 " --------------------------------
 let g:acp_enableAtStartup = 0
@@ -299,31 +307,44 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 
 " ---------------------------------------------------------------------------
-" for memolist"{{{
-map <Leader>mn  :MemoNew<CR>
-map <Leader>ml  :MemoList<CR>
-map <Leader>mg  :MemoGrep<CR>
-
-let g:memolist_memo_suffix = "md"
-let g:memolist_memo_date = "%Y-%m-%d %H:%M"
-" let g:memolist_memo_date = "epoch"
-" let g:memolist_memo_date = "%D %T"
-" let g:memolist_prompt_tags = 1
-" let g:memolist_prompt_categories = 1
-let g:memolist_qfixgrep = 1
-" let g:memolist_vimfiler = 1
-" let g:memolist_template_dir_path = "path/to/dir""}}}
+"
 " ---------------------------------------------------------------------------
 "for easy-align
 vnoremap <silent><Enter> :EasyAlign<cr>
 " ---------------------------------------------------------------------------
-"for incsearch-fuzzy
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
 " -------------------------------
 " Rsense
 " -------------------------------
 let g:rsenseHome = '/usr/local/Cellar/rsense/0.3/libexec'
 let g:rsenseUseOmniFunc = 1
+
+" -------------------------------
+" jq
+" -------------------------------
+if executable('jq')
+  function! s:jq(has_bang, ...) abort range
+    execute 'silent' a:firstline ',' a:lastline '!jq' string(a:0 == 0 ? '.' : a:1)
+    if !v:shell_error || a:has_bang
+      return
+    endif
+    let error_lines = filter(getline('1', '$'), 'v:val =~# "^parse error: "')
+    " 範囲指定している場合のために，行番号を置き換える
+    let error_lines = map(error_lines, 'substitute(v:val, "line \\zs\\(\\d\\+\\)\\ze,", "\\=(submatch(1) + a:firstline - 1)", "")')
+    let winheight = len(error_lines) > 10 ? 10 : len(error_lines)
+    " カレントバッファがエラーメッセージになっているので，元に戻す
+    undo
+    " カレントバッファの下に新たにウィンドウを作り，エラーメッセージを表示するバッファを作成する
+    execute 'botright' winheight 'new'
+    setlocal nobuflisted bufhidden=unload buftype=nofile
+    call setline(1, error_lines)
+    " エラーメッセージ用バッファのundo履歴を削除(エラーメッセージをundoで消去しないため)
+    let save_undolevels = &l:undolevels
+    setlocal undolevels=-1
+    execute "normal! a \<BS>\<Esc>"
+    setlocal nomodified
+    let &l:undolevels = save_undolevels
+    " エラーメッセージ用バッファは読み取り専用にしておく
+    setlocal readonly
+  endfunction
+  command! -bar -bang -range=% -nargs=? Jq  <line1>,<line2>call s:jq(<bang>0, <f-args>)
+endif
