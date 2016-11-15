@@ -14,6 +14,7 @@ export PATH="/Applications/android-sdk-macosx/platform-tools:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 export ELASTICPATH="/usr/local/Cellar/elasticsearch/2.4.0/libexec/bin/"
 export PATH=$ELASTICPAT:$PATH
+export PATH=$(brew --prefix openssl)/bin:$PATH
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export PATH=$(brew --prefix php54)/bin:$PATH
 
