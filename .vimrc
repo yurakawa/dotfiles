@@ -162,7 +162,7 @@ set hlsearch
 " --------------------------------------------
 " Edit settings {{{
 " タブの画面上での幅
-set tabstop=2
+set tabstop=4
 " インデントの各段階に使われる空白の数。
 set shiftwidth=2
 " <Tab>の挿入や<BS>の使用等の編集操作をする時に、<Tab>が対応する空白の数。
@@ -206,6 +206,10 @@ set ambiwidth=double
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap Y y$
+
+" jsonのConceal機能をoffにする
+let g:vim_json_syntax_conceal = 0
+
 
 " }}}
 " --------------------------------------------
@@ -291,9 +295,11 @@ endif
 " BackupFile Settings {{{
 
 " バックアップファイルの生成先変更
-set backupdir=/var/tmp
+" set backupdir=/var/tmp
+set backupdir=~/.vim/tmp
 " swapファイルの生成先変更
-set directory=/var/tmp
+" set directory=/var/tmp
+set directory=~/.vim/tmp
 " .unファイルの生成先変更
 set noundofile
 " }}}
@@ -303,12 +309,12 @@ nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 " }}}
 " --------------------------------------------
 " Json formatter at python {{{
- command! JsonFormat :execute '%!python -m json.tool'
 " command! JsonFormat :execute '%!python -m json.tool'
-"  \ | :execute '%!python -c "import re,sys;chr=__builtins__.__dict__.get(\"unichr\", chr);sys.stdout.write(re.sub(r\"\\\\u[0-9a-f]{4}\", lambda x: chr(int(\"0x\" + x.group(0)[2:], 16)).encode(\"utf-8\"), sys.stdin.read()))"'
-"  \ | :%s/ \+$//ge
-"  \ | :set ft=javascript
-"  \ | :1
+command! JsonFormat :execute '%!python -m json.tool'
+ \ | :execute '%!python -c "import re,sys;chr=__builtins__.__dict__.get(\"unichr\", chr);sys.stdout.write(re.sub(r\"\\\\u[0-9a-f]{4}\", lambda x: chr(int(\"0x\" + x.group(0)[2:], 16)).encode(\"utf-8\"), sys.stdin.read()))"'
+ \ | :%s/ \+$//ge
+ \ | :set ft=javascript
+ \ | :1
 "set virtualedit+=all
 " }}}
 " --------------------------------------------

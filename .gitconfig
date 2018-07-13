@@ -1,13 +1,21 @@
-
 [user]
 	name = y.urakawa
 	email = s08a2015@gmail.com
+[includeIf "gitdir:~/workspace/millvi2-terraform/"]
+  path = ~/.gitconfig-eviry
+[includeIf "gitdir:~/workspace/millvi2-vagrant/"]
+  path = ~/.gitconfig-eviry
+[includeIf "gitdir:~/workspace/live-vagrant/"]
+  path = ~/.gitconfig-eviry
+
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = /usr/local/bin/vim
 [push]
 	default = simple
 [alias]
+  dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
+
   unstage = reset -q HEAD --
   discard = checkout --
   nevermind = !git reset --hard HEAD && git clean -d -f
@@ -53,3 +61,5 @@
 	required = true
 [commit]
 	template = /Users/y.urakawa/.gitmessage.txt
+[ghq]
+    root = ~/go/src

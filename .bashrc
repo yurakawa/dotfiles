@@ -15,14 +15,18 @@ unset color_prompt force_color_prompt
 
 case "${OSTYPE}" in
   darwin*)
-    #alias ls="ls -G"
-    #alias ll="ls -alG"
+    # alias ls="ls -G"
+    # alias ll="ls -alG"
     alias ls='ls --color'
     alias ll='ls -la --color'
-    #alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+    alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
     alias vi='/usr/local/bin/mvim'
     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias rmigc='bundle exec rake db:migrate db:test:clone'
+    alias vssh='vagrant ssh'
+    alias vup='vagrant up'
+    alias vhalt='vagrant halt'
+    alias vreload='vagrant reload'
     ;;
   linux*)
     alias ls='ls --color'
@@ -42,7 +46,10 @@ if [[ -n "$PS1" ]]; then
     }
 fi
 
-# bash_completion 
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-fi
+function peco-src() {
+  local src=$(ghq list --full-path | peco --query "$LBUFFER")
+  if [ -n "$src" ]; then
+    cd $src
+  fi
+}
+bind -x '"": peco-src'
