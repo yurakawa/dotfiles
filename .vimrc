@@ -64,6 +64,7 @@ call dein#add('tpope/vim-surround')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('kannokanno/previm')
 call dein#add('tyru/open-browser.vim')
+call dein#add('chr4/nginx.vim')
 
 call dein#end()
 

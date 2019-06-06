@@ -23,7 +23,6 @@ export PATH="/Applications/android-sdk-macosx/platform-tools:$PATH"
 # export PATH=$(brew --prefix coreutils)/libexec/gnuman:$PATH
 export PATH=/usr/local/opt/openssl/bin:$PATH
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-export PATH=`npm bin -g`:$PATH
 export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
 
 # export PATH=$(brew --prefix php54)/bin:$PATH
@@ -32,7 +31,9 @@ export SCALA_HOME=/usr/local/Cellar/scala/2.11.8
 export PATH=$PATH:$SCALA_HOME/bin
 
 export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 export GOROOT=$HOME/.anyenv/envs/goenv/shims
+export GO111MODULE=on 
 export PATH=$PATH:$GOPATH/bin
 
 # if [ -e ~/script/script.sh ]; then
@@ -48,7 +49,14 @@ fi
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
+export PATH=`npm bin -g`:$PATH
+
+direnv help &> /dev/null
+if [ $? -eq 0 ]; then
+  eval "$(direnv hook bash)"
+fi
+
+
 
 # bash_completion 
 source $(brew --prefix bash-completion)/etc/bash_completion
-
