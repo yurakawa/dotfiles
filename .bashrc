@@ -1,4 +1,8 @@
 
+source /usr/local/etc/bash_completion.d/git-prompt.sh
+source /usr/local/etc/bash_completion.d/git-completion.bash
+GIT_PS1_SHOWDIRTYSTATE=true
+
 # Prompt
 color_prompt=yes
 if [ "$color_prompt" = yes ]; then
@@ -6,6 +10,8 @@ if [ "$color_prompt" = yes ]; then
   HOST_COLOR='\[\033[01;32m\]'
   PWD_COLOR='\[\033[01;32m\]'
   RESET_COLOR='\[\033[00m\]'
+  # BRANCH_COLOR='\[\033[31m\]'
+
   PS1="${debian_chroot:+$debian_chroot)}${USER_COLOR}\u${HOST_COLOR}@\h:${PWD_COLOR}\w${RESET_COLOR}\$ "
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -27,6 +33,10 @@ case "${OSTYPE}" in
     alias vup='vagrant up'
     alias vhalt='vagrant halt'
     alias vreload='vagrant reload'
+    alias dco='docker-compose'
+    alias hex2dec="printf '%d\n'"
+    alias dec2hex="printf '%x\n'"
+    alias pip='pip3.5'
     ;;
   linux*)
     alias ls='ls --color'
@@ -53,3 +63,25 @@ function peco-src() {
   fi
 }
 bind -x '"": peco-src'
+
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+fbrm() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+bind -x '"":fbr'
+bind -x '"":fbrm'
+
+
+
+source ~/.bashrc_origami
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
