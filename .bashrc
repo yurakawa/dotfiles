@@ -80,8 +80,4 @@ fbrm() {
 bind -x '"":fbr'
 bind -x '"":fbrm'
 
-
-
-source ~/.bashrc_origami
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

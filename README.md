@@ -2,4 +2,4 @@
 ## Installation
 one-liner:  
 
-    git clone https://github.com/yurakawa/dotfiles.git $HOME/dotfiles && cd ~/dotfiles && ./install.sh
+    git clone https://github.com/yurakawa/dotfiles.git $HOME/dotfiles && cd ~/dotfiles && ./install

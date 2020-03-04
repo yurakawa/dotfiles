@@ -4,6 +4,8 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = /usr/local/bin/vim
+[includeIf "gitdir:~/go/src/github.com/kouzoh/"]
+  path = ~/.gitconfig-mercari
 [push]
 	default = current
 [alias]
