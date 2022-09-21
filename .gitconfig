@@ -3,7 +3,7 @@
 	email = s08a2015@gmail.com
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = /usr/local/bin/vim
+	editor = /usr/bin/vim
 [includeIf "gitdir:~/go/src/github.com/kouzoh/"]
   path = ~/.gitconfig-mercari
 [url "git@github.com:"]
@@ -60,7 +60,7 @@
 	smudge = git-lfs smudge %f
 	required = true
 [commit]
-	template = /Users/y.urakawa/.gitmessage.txt
+	template = /Users/yurakawa/.gitmessage.txt
 [ghq]
     root = ~/go/src
 

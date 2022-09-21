@@ -9,11 +9,12 @@
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-
 # Customize to your needs...
 
+source <(kubectl completion zsh)
 
-alias vi='/usr/local/bin/gvim'
+# alias vi='/usr/local/bin/gvim'
+alias vi='/Applications/MacVim.app/Contents/bin/mvim'
 
 function peco-src () {
   local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
@@ -26,11 +27,25 @@ function peco-src () {
 zle -N peco-src
 bindkey '^]' peco-src
 
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+  }
+zle -N peco-select-history
+bindkey '^r' peco-select-history
 
 if [ -d $HOME/.anyenv/bin ] ; then
     export PATH="$HOME/.anyenv/bin:$PATH"
-    # eval "$(pHOME/.anyenv/libexec/anyenv-init - --no-rehash)"
-     eval "$(anyenv init - --no-rehash)"
+    eval "$(anyenv init - --no-rehash)"
 fi
 
 export EDITOR=vim
@@ -41,15 +56,42 @@ fi
 
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export GOROOT=$HOME/.anyenv/envs/goenv/shims
+# export GOROOT=$HOME/.anyenv/envs/goenv/shims
+export GOPRIVATE=github.com/kouzoh
 export GOENV_DISABLE_GOPATH=1
-# export GO111MODULE=on
 export PATH=$PATH:$GOBIN
 
+export PATH=/usr/local/opt/openssl/bin:$PATH
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
+export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:${PATH}
+export MANPATH=/usr/local/opt/gnu-sed/libexec/gnuman:${MANPATH}
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
 
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME/jre/bin:$PATH
+export CLOUDSDK_PYTHON=/usr/bin/python3
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+alias lg='lazygit'
+alias dco='docker-compose'
+alias k='kubectl'
+alias kd='kubectl get deploy'
+alias kp='kubectl get pod'
+alias ks='kubectl get service'
+
+alias k-set-ctx-delv='kubectl config set-context --current --namespace=<insert-namespace-name-here>'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/yurakawa/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yurakawa/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/yurakawa/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yurakawa/google-cloud-sdk/completion.zsh.inc'; fi
+
+source $HOME/.iterm2_shell_integration.zsh
+function iterm2_print_user_vars() {
+  iterm2_set_user_var kubecontext $(kube-context-info)
+}
