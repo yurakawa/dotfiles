@@ -5,7 +5,7 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
 
-all: init defaults brew install
+all: init defaults link brew
 
 # Set initial preference.
 init:
