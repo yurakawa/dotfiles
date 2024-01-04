@@ -14,5 +14,3 @@ Set macOS.
 ```
 $ cd dotfiles && make
 ```
-
-    git clone https://github.com/yurakawa/dotfiles.git $HOME/dotfiles && cd ~/dotfiles && ./install
