@@ -59,8 +59,6 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[commit]
-	template = /Users/yurakawa/.gitmessage.txt
 [ghq]
     root = ~/go/src
 
