@@ -12,5 +12,5 @@ $ git clone https://github.com/yurakawa/dotfiles
 Set macOS.
 
 ```
-$ cd dotfiles && make
+$ cd dotfiles && make all
 ```
