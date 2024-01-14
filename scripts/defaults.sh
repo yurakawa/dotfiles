@@ -104,6 +104,17 @@ defaults write com.apple.menuextra.clock DateFormat -string 'EEE d MMM HH:mm'
 # Use UTF-8 only
 defaults write com.apple.terminal StringEncodings -array 4
 
+## remap caps lock key to control (need os restart)
+keyboard_id="$(ioreg -c AppleEmbeddedKeyboard -r | grep -Eiw "VendorID|ProductID" | awk '{ print $4 }' | paste -s -d'-\n' -)-0"
+defaults -currentHost write -g com.apple.keyboard.modifiermapping.${keyboard_id} -array-add "
+<dict>
+  <key>HIDKeyboardModifierMappingDst</key>\
+  <integer>30064771300</integer>\
+  <key>HIDKeyboardModifierMappingSrc</key>\
+  <integer>30064771129</integer>\
+</dict>
+"
+
 for app in "Dock" \
 	"Finder" \
 	"SystemUIServer"; do
