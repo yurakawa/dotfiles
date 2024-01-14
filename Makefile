@@ -31,6 +31,11 @@ link: # Link dotfiles.
 	@sh ./scripts/link.sh
 	@echo "\033[0;34mDone.\033[0m"
 
+goinstall:
+	@echo "\033[0;34mInstall go modules\033[0m"
+	@sh ./scripts/goinstall.sh
+	@echo "\033[0;34mDone.\033[0m"
+
 clean: ## Remove the dot files and this repo
 	@echo 'Remove dot files in your home directory...'
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
