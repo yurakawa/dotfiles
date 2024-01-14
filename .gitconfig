@@ -1,18 +1,16 @@
 [user]
-	name = y.urakawa
-	email = s08a2015@gmail.com
+  name = y.urakawa
+  email = s08a2015@gmail.com
+  signingkey = 31785144A10EFABB57C341DE4167E1C3A2DBEE2D
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = /usr/bin/vim
-[includeIf "gitdir:~/go/src/github.com/kouzoh/"]
-  path = ~/.gitconfig-mercari
+  excludesfile = ~/.gitignore_global
+  editor = /usr/bin/vim
 [url "git@github.com:"]
   insteadOf = https://github.com/
 [push]
-	default = current
+  default = current
 [alias]
   dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
-
   unstage = reset -q HEAD --
   discard = checkout --
   nevermind = !git reset --hard HEAD && git clean -d -f
@@ -44,21 +42,18 @@
   filetrail = log --follow -p -w
   mergetrail = log --ancestry-path --merges
   unmerged = diff --name-only --diff-filter=U
+  push-f = push --force-with-lease --force-if-include
 [pager]
   log = diff-highlight | less
   show = diff-highlight | less
   diff = diff-highlight | less
-
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
 [ghq]
     root = ~/go/src
-
+[gpg]
+	program = gpg
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/

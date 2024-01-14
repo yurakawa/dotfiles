@@ -12,20 +12,21 @@ if has("vim_starting")
 endif
 
 " Set dein paths
-let s:dein_dir = s:vimdir
-let s:dein_github = s:dein_dir . '/repos/github.com'
-let s:dein_repo_name = "Shougo/dein.vim"
-let s:dein_repo_dir = s:dein_github . '/' . s:dein_repo_name
-
-" Check dein has been installed or not.
-if !isdirectory(s:dein_repo_dir)
-  echo "dein is not installed, install now "
-  let s:dein_repo = "https://github.com/" . s:dein_repo_name
-  echo "git clone " . s:dein_repo . " " . s:dein_repo_dir
-  call system("git clone " . s:dein_repo . " " . s:dein_repo_dir)
+let $CACHE = expand('~/.cache')
+if !($CACHE->isdirectory())
+  call mkdir($CACHE, 'p')
 endif
-
-let &runtimepath = &runtimepath . "," . s:dein_repo_dir
+if &runtimepath !~# '/dein.vim'
+  let s:dir = 'dein.vim'->fnamemodify(':p')
+  if !(s:dir->isdirectory())
+    let s:dir = $CACHE .. '/dein/repos/github.com/Shougo/dein.vim'
+    if !(s:dir->isdirectory())
+      execute '!git clone https://github.com/Shougo/dein.vim' s:dir
+    endif
+  endif
+  execute 'set runtimepath^='
+        \ .. s:dir->fnamemodify(':p')->substitute('[/\\]$', '', '')
+endif
 
 " Begin plugin part
 "call dein#begin(expand('~/.vim/dein'))
@@ -318,6 +319,8 @@ command! JsonFormat :execute '%!python -m json.tool'
  \ | :1
 "set virtualedit+=all
 " }}}
+"
+command! Jqf %!jq '.'
 " --------------------------------------------
 " easy-align Settings {{{
 vnoremap <silent><Enter> :EasyAlign<cr>
