@@ -10,6 +10,7 @@ tap "homebrew/core"
 # Brew
 #   https://formulae.brew.sh/
 #
+brew "actionlint"
 brew "awscli"
 brew "bash-completion"
 brew "diff-so-fancy"
