@@ -30,7 +30,6 @@ function peco-src () {
 zle -N peco-src
 bindkey '^]' peco-src
 
-unalias lk
 function lk {
   cd "$(walk "$@")"
 }
@@ -100,10 +99,10 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zs
 # The next line enables shell command completion for gcloud.
 if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
 
-source $HOME/.iterm2_shell_integration.zsh
-function iterm2_print_user_vars() {
-  iterm2_set_user_var kubecontext $(kube-context-info)
-}
+# source $HOME/.iterm2_shell_integration.zsh
+# function iterm2_print_user_vars() {
+#   iterm2_set_user_var kubecontext $(kube-context-info)
+# }
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/Users/yurakawa/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
 

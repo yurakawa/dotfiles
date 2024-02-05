@@ -35,6 +35,11 @@ defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 # Timing to start key repeat
 defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
+# Enable three-finger drag
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true && \
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+
+
 # ====================
 #
 # DesktopServices
@@ -56,6 +61,13 @@ defaults write com.apple.dock autohide-delay -float 0
 
 # Disable animation at application launch
 # defaults write com.apple.dock launchanim -bool false
+
+# Highlight hidden apps in the Dock
+defaults write com.apple.Dock showhidden -bool YES
+
+defaults write com.apple.dock orientation -string "left"
+defaults write com.apple.dock magnification -bool true
+defaults write com.apple.dock autohide -bool true
 
 # ====================
 #
@@ -105,15 +117,15 @@ defaults write com.apple.menuextra.clock DateFormat -string 'EEE d MMM HH:mm'
 defaults write com.apple.terminal StringEncodings -array 4
 
 ## remap caps lock key to control (need os restart)
-keyboard_id="$(ioreg -c AppleEmbeddedKeyboard -r | grep -Eiw "VendorID|ProductID" | awk '{ print $4 }' | paste -s -d'-\n' -)-0"
-defaults -currentHost write -g com.apple.keyboard.modifiermapping.${keyboard_id} -array-add "
-<dict>
-  <key>HIDKeyboardModifierMappingDst</key>\
-  <integer>30064771300</integer>\
-  <key>HIDKeyboardModifierMappingSrc</key>\
-  <integer>30064771129</integer>\
-</dict>
-"
+# keyboard_id="$(ioreg -c AppleEmbeddedKeyboard -r | grep -Eiw "VendorID|ProductID" | awk '{ print $4 }' | paste -s -d'-\n' -)-0"
+# defaults -currentHost write -g com.apple.keyboard.modifiermapping.${keyboard_id} -array-add "
+# <dict>
+#   <key>HIDKeyboardModifierMappingDst</key>\
+#   <integer>30064771300</integer>\
+#   <key>HIDKeyboardModifierMappingSrc</key>\
+#   <integer>30064771129</integer>\
+# </dict>
+# "
 
 for app in "Dock" \
 	"Finder" \

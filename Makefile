@@ -28,7 +28,7 @@ defaults: ## Set macOS system preferences
 
 link: # Link dotfiles.
 	@echo "\033[0;34mLink dotfiles\033[0m"
-	@sh ./scripts/link.sh
+	@zsh ./scripts/link.sh
 	@echo "\033[0;34mDone.\033[0m"
 
 goinstall:
