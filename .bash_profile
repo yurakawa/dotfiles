@@ -60,3 +60,5 @@ if [ -f '/Users/yuya.urakawa/Downloads/google-cloud-sdk/path.bash.inc' ]; then .
 if [ -f '/Users/yuya.urakawa/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/yuya.urakawa/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
 CLOUDSDK_PYTHON=$(which python2)
+
+. "$HOME/.local/bin/env"

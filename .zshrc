@@ -8,16 +8,15 @@
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-else
-  autoload -Uz compinit
-  compinit
 fi
+autoload bashcompinit && bashcompinit
+
 # Customize to your needs...
 
 alias ll='ls -alh'
 alias date='gdate'
 # alias vi='/usr/local/bin/gvim'
-alias vi='/Applications/MacVim.app/Contents/bin/mvim'
+# alias vi='/Applications/MacVim.app/Contents/bin/mvim'
 
 function peco-src () {
   local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
@@ -82,6 +81,7 @@ export PATH="/opt/homebrew/share/git-core/contrib/diff-highlight:${PATH}"
 export CLOUDSDK_PYTHON=/usr/bin/python3
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$HOME/development/flutter/bin:$PATH
 
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 alias lg='lazygit'
@@ -92,6 +92,10 @@ alias kp='kubectl get pod'
 alias ks='kubectl get service'
 
 alias k-set-ctx-delv='kubectl config set-context --current --namespace=<insert-namespace-name-here>'
+
+alias original_cue='~/go/bin/cue'
+
+if [ -f '/opt/homebrew/bin/aws_completer' ]; then complete -C '/opt/homebrew/bin/aws_completer' aws; fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
@@ -114,3 +118,9 @@ if [ $? -eq 0 ]; then
 fi
 
 export GPG_TTY=$(tty)
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PATH"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+export PATH=$HOME/.nodebrew/current/bin:$PATH

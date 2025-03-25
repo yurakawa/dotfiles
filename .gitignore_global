@@ -4,3 +4,6 @@
 .*.un~
 .idea
 .vscode
+.clinerules
+.cursorindexignore
+
