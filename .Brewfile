@@ -37,6 +37,7 @@ brew "libmcrypt"
 brew "mas" if OS.mac?
 brew "openssl"
 brew "peco"
+brew "pinentry-mac"
 brew "protobuf"
 brew "protoc-gen-go"
 brew "protoc-gen-go-grpc"

@@ -39,6 +39,11 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 25
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true && \
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
 
+# Trackpad scaling
+defaults write -g com.apple.trackpad.scaling 8
+
+# Mouse scaling
+defaults write -g com.apple.mouse.scaling 8
 
 # ====================
 #

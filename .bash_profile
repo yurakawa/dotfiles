@@ -46,6 +46,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export GOROOT=$HOME/.anyenv/envs/goenv/shims
 export GOENV_DISABLE_GOPATH=1
+export GPG_TTY=$(tty)
 # export GO111MODULE=on
 export PATH=$PATH:$GOBIN
 

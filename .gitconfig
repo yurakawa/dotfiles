@@ -48,9 +48,9 @@
   show = diff-highlight | less
   diff = diff-highlight | less
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
 [ghq]
     root = ~/go/src
 [gpg]
