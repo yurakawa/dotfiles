@@ -1,16 +1,68 @@
 # dotfiles
 
-This repository contains scripts to set macOS.
+My dotfiles for macOS, managed by [chezmoi](https://www.chezmoi.io/) and using [zimfw](https://zimfw.sh/) as zsh framework.
 
-## Installation
-Download installation materials.
+## Quick Start (New Machine)
+
+```bash
+# Install chezmoi and apply dotfiles
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply yurakawa/chezmoi-dotfiles
+```
+
+## Manual Installation
+
+```bash
+# Clone this repository
+git clone https://github.com/yurakawa/dotfiles
+cd dotfiles
+
+# Install dependencies
+make all
+```
+
+## What's Included
+
+- **Zsh** with [zimfw](https://zimfw.sh/) - Fast, modular zsh framework
+  - [pure](https://github.com/sindresorhus/pure) prompt
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - zsh-completions
+- **Git** configuration
+- **Vim/GVim** configuration
+- **Tmux** configuration
+- **Karabiner-Elements** configuration
+- **Homebrew** bundle (`.Brewfile`)
+
+## File Structure
 
 ```
-$ git clone https://github.com/yurakawa/dotfiles
+~/.zshrc          # Main zsh config (zimfw)
+~/.zimrc          # zimfw module configuration
+~/.gitconfig      # Git configuration
+~/.vimrc          # Vim configuration
+~/.tmux.conf      # Tmux configuration
+~/.config/karabiner/karabiner.json  # Karabiner config
 ```
 
-Set macOS.
+## Managing Dotfiles
 
+```bash
+# Add a new file to chezmoi
+chezmoi add ~/.config/some-config
+
+# Edit a managed file
+chezmoi edit ~/.zshrc
+
+# See pending changes
+chezmoi diff
+
+# Apply changes
+chezmoi apply
+
+# Update from remote
+chezmoi update
 ```
-$ cd dotfiles && make all
-```
+
+## Legacy
+
+Previously used [Prezto](https://github.com/sorin-ionescu/prezto). Migrated to zimfw for better performance.
