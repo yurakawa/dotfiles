@@ -1,13 +1,10 @@
 # Files to ignore when applying
 
 README.md
-Makefile
 Brewfile
 .codacy/
 .gitignore
 LICENSE
-hoge.sh
-prezto/
 
 # OS-specific files
 

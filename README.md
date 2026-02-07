@@ -71,7 +71,3 @@ chezmoi apply
 # Update from remote
 chezmoi update
 ```
-
-## Legacy
-
-Previously used [Prezto](https://github.com/sorin-ionescu/prezto). Migrated to zimfw for better performance.
