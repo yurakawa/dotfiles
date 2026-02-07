@@ -10,6 +10,8 @@
 [push]
   default = current
 [alias]
+  #aicommit = "!f() { COMMIT_MSG=$(claude -p 'Generate ONLY a one-line Git commit message in English, using imperative mood, summarizing what was changed and why, based strictly on the contents of `git diff --cached`. Do not add explanation or a body. Output only the commit summary line.'); git commit -m \"$COMMIT_MSG\" -e; }; f"
+  aicommit = "!f() { COMMIT_MSG=$(copilot -p 'Generate ONLY a one-line Git commit message in English (max 72 chars) based on `git diff --cached`, using Conventional Commits format (e.g., feat:, fix:), imperative mood, and summarizing both the change and its inferred intent without any preamble or backticks.'); git commit -m \"$COMMIT_MSG\" -e; }; f"
   dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
   unstage = reset -q HEAD --
   discard = checkout --
@@ -44,9 +46,9 @@
   unmerged = diff --name-only --diff-filter=U
   push-f = push --force-with-lease --force-if-include
 [pager]
-  log = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
+#  log = diff-highlight | less
+#  show = diff-highlight | less
+#  diff = diff-highlight | less
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f

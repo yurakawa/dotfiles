@@ -50,7 +50,6 @@ call dein#add('junegunn/vim-easy-align')
 call dein#add('glidenote/memolist.vim')
 call dein#add('Shougo/vimfiler')
 call dein#add('Shougo/neocomplete.vim')
-call dein#add('marcus/rsense')
 call dein#add('scrooloose/syntastic')
 call dein#add('tpope/vim-endwise')
 call dein#add('elzr/vim-json')
@@ -121,15 +120,9 @@ let g:memolist_qfixgrep = 1
 let g:memolist_ex_cmd = 'NERDTree'
 "
 "}}}
-" Rsense {{{
-let g:rsenseHome = '/usr/local/Cellar/rsense/0.3/libexec'
-let g:rsenseUseOmniFunc = 1
-" }}}
 " PrevimOpen {{{
 noremap <silent> <F7> :PrevimOpen<CR>
 " }}}
- 
-"}}}
 " --------------------------------------------
 " Base settings {{{
 " vim内部で使われる文字コードを設定する

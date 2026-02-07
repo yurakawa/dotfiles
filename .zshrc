@@ -63,7 +63,8 @@ fi
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 # export GOROOT=$HOME/.anyenv/envs/goenv/shims
-export GOPRIVATE=github.com/kouzoh
+export GOPRIVATE=github.com/hq-jp
+
 export GOENV_DISABLE_GOPATH=1
 export PATH=${PATH}:${GOBIN}
 
