@@ -5,8 +5,16 @@ My dotfiles for macOS, managed by [chezmoi](https://www.chezmoi.io/) and using [
 ## Quick Start (New Machine)
 
 ```bash
-# Install chezmoi and apply dotfiles
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply yurakawa/chezmoi-dotfiles
+# Clone and setup
+git clone https://github.com/yurakawa/dotfiles ~/dotfiles
+cd ~/dotfiles
+./scripts/link.sh
+```
+
+Or with chezmoi directly:
+
+```bash
+chezmoi init yurakawa/dotfiles --apply
 ```
 
 ## Manual Installation

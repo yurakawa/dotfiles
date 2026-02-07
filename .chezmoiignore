@@ -1,0 +1,16 @@
+# Files to ignore when applying
+README.md
+Makefile
+scripts/
+.codacy/
+.gitignore
+LICENSE
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~

@@ -1,27 +1,29 @@
 #!/bin/zsh
 
-# This script is deprecated. Use chezmoi instead.
-# For new setup, run: chezmoi init yurakawa/chezmoi-dotfiles && chezmoi apply
-
 DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-# Link dotfiles (legacy method, prefer chezmoi)
-for dotfile in ${DOTFILES_DIR}/.??* ; do
-    [[ "$dotfile" == "${DOTFILES_DIR}/.git" ]] && continue
-    [[ "$dotfile" == "${DOTFILES_DIR}/.github" ]] && continue
-    [[ "$dotfile" == "${DOTFILES_DIR}/.DS_Store" ]] && continue
-    [[ "$dotfile" == "${DOTFILES_DIR}/.gitmodules" ]] && continue
+# Setup chezmoi to use this dotfiles directory
+if [[ ! -L "${HOME}/.local/share/chezmoi" ]]; then
+    echo "Setting up chezmoi..."
+    mkdir -p "${HOME}/.local/share"
+    ln -sfn "${DOTFILES_DIR}" "${HOME}/.local/share/chezmoi"
+fi
 
-    ln -fnsv "$dotfile" "$HOME"
-done
+# Install chezmoi if not installed
+if ! command -v chezmoi &> /dev/null; then
+    echo "Installing chezmoi..."
+    brew install chezmoi || sh -c "$(curl -fsLS get.chezmoi.io)"
+fi
 
-# Karabiner config
-mkdir -p "${HOME}/.config/karabiner"
-ln -fnsfv "${DOTFILES_DIR}/karabiner.json" "${HOME}/.config/karabiner"
+# Apply dotfiles using chezmoi
+echo "Applying dotfiles with chezmoi..."
+chezmoi apply -v
 
 # zimfw installation (if not already installed)
 if [[ ! -d "${HOME}/.zim" ]]; then
     echo "Installing zimfw..."
     curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 fi
+
+echo "Done!"
 
