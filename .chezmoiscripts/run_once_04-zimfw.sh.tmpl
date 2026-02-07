@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+set -e
+
+echo "🐚 Setting up zimfw..."
+
+# Install zimfw if not already installed
+if [[ ! -d "${HOME}/.zim" ]]; then
+    echo "📦 Installing zimfw..."
+    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+fi
+
+echo "✅ zimfw setup complete!"
+{{- end }}

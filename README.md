@@ -5,23 +5,24 @@ My dotfiles for macOS, managed by [chezmoi](https://www.chezmoi.io/) and using [
 ## Quick Start (New Machine)
 
 ```bash
-# Clone and setup
-git clone https://github.com/yurakawa/dotfiles ~/dotfiles
-cd ~/dotfiles
-./scripts/link.sh
+# One command setup (recommended)
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply yurakawa/dotfiles
 ```
 
-Or with chezmoi directly:
+This will automatically:
 
-```bash
-chezmoi init yurakawa/dotfiles --apply
-```
+1. Install Xcode Command Line Tools
+2. Install Homebrew
+3. Install packages from Brewfile
+4. Configure macOS defaults
+5. Install zimfw and plugins
+6. Deploy all dotfiles
 
 ## Manual Installation
 
 ```bash
 # Clone this repository
-git clone https://github.com/yurakawa/dotfiles
+git clone https://github.com/yurakawa/dotfiles ~/dotfiles
 cd dotfiles
 
 # Install dependencies

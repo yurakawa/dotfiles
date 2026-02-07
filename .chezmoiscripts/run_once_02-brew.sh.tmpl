@@ -1,0 +1,54 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+set -e
+
+echo "🍺 Installing Homebrew packages..."
+
+# Ensure Homebrew is in PATH
+if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+if ! command -v brew &> /dev/null; then
+    echo "❌ Homebrew is not installed. Please run 'chezmoi apply' again."
+    exit 1
+fi
+
+# Check if App Store login is needed for mas
+function open_app_store {
+    echo "📱 Please login with your Apple ID"
+    sleep 1
+    echo "Opening the App Store..."
+    sleep 1
+    open -a App\ Store
+}
+
+function login_check {
+    while true; do
+        echo -n "$* [Y/n]: (default: n) "
+        read ANS
+        case $ANS in
+            [Yy]*)
+                return 0
+                ;;
+            *)
+                open_app_store
+                ;;
+        esac
+    done
+}
+
+# Install from Brewfile in chezmoi source directory
+BREWFILE="{{ .chezmoi.sourceDir }}/Brewfile"
+if [[ -f "$BREWFILE" ]]; then
+    open_app_store
+    if login_check "Did you login to App Store?"; then
+        brew bundle --file="$BREWFILE"
+    fi
+else
+    echo "⚠️  Brewfile not found at $BREWFILE. Skipping brew bundle."
+fi
+
+echo "✅ Homebrew packages installed!"
+{{- end }}
