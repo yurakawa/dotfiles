@@ -88,6 +88,12 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
+# Claude
+export PATH="$HOME/.local/bin:$PATH"
+
+# Obsidian
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
 # ------------------
 # Aliases
 # ------------------
@@ -155,4 +161,11 @@ fi
 
 # Docker CLI
 fpath=($HOME/.docker/completions $fpath)
+
+# ------------------
+# Local Settings
+# ------------------
+if [ -f "$HOME/.zshrc_hq" ]; then
+    source "$HOME/.zshrc_hq"
+fi
 

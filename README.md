@@ -20,13 +20,18 @@ This will automatically:
 
 ## Manual Installation
 
+If you prefer to clone the repository manually:
+
 ```bash
 # Clone this repository
-git clone https://github.com/yurakawa/dotfiles ~/dotfiles
-cd dotfiles
+git clone https://github.com/yurakawa/dotfiles.git ${HOME}/dotfiles
+cd ${HOME}/dotfiles
 
-# Install dependencies
-make all
+# Install chezmoi if not already installed
+# brew install chezmoi
+
+# Initialize and apply the dotfiles from the current directory
+chezmoi init --apply --source .
 ```
 
 ## What's Included
