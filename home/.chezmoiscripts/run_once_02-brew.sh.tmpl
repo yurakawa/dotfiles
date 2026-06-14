@@ -18,6 +18,10 @@ fi
 # Install from Brewfile in repository root (parent of chezmoi source directory)
 BREWFILE="{{ .chezmoi.sourceDir }}/../Brewfile"
 if [[ -f "$BREWFILE" ]]; then
+    if grep -q "hashicorp/tap" "$BREWFILE"; then
+        brew tap hashicorp/tap 2>/dev/null || true
+        brew trust hashicorp/tap 2>/dev/null || true
+    fi
     brew bundle --file="$BREWFILE" || echo "⚠️  Some packages failed to install"
 else
     echo "⚠️  Brewfile not found at $BREWFILE. Skipping brew bundle."
