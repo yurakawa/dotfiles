@@ -63,3 +63,10 @@
     insteadOf = https://github.com/
 [commit]
 	gpgsign = true
+[tig]
+	mouse = yes
+	blame-view-date = custom
+	blame-view-date-format = "%Y-%m-%d"
+	main-view-date = custom
+	main-view-date-format = "%Y-%m-%d"
+	line-graphics = ascii

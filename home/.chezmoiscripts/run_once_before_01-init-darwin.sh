@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
 set -e
@@ -28,4 +27,3 @@ if ! command -v brew &> /dev/null; then
 fi
 
 echo "✅ Initial setup complete!"
-{{- end }}

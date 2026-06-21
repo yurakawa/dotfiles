@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
 set -e
@@ -107,4 +106,3 @@ for app in "Dock" "Finder" "SystemUIServer"; do
 done
 
 echo "✅ macOS defaults configured!"
-{{- end }}

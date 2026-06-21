@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
 set -e
@@ -16,7 +15,7 @@ if ! command -v brew &> /dev/null; then
 fi
 
 # Install from Brewfile in repository root (parent of chezmoi source directory)
-BREWFILE="{{ .chezmoi.sourceDir }}/../Brewfile"
+BREWFILE="${CHEZMOI_SOURCE_DIR}/../Brewfile"
 if [[ -f "$BREWFILE" ]]; then
     if grep -q "hashicorp/tap" "$BREWFILE"; then
         brew tap hashicorp/tap 2>/dev/null || true
@@ -28,4 +27,3 @@ else
 fi
 
 echo "✅ Homebrew packages installed!"
-{{- end }}

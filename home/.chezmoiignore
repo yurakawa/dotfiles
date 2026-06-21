@@ -16,3 +16,11 @@ Thumbs.db
 _.swp
 _.swo
 \*~
+
+# OS-specific scripts
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/*darwin*
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/*linux*
+{{ end }}

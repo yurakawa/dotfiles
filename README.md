@@ -76,3 +76,24 @@ chezmoi apply
 # Update from remote
 chezmoi update
 ```
+
+## Task Runner (Makefile)
+
+This repository includes a `Makefile` to simplify common `chezmoi` workflows. You can run `make` or `make help` to see available commands:
+
+```bash
+make help    # Show available commands
+make init    # Initialize and apply dotfiles on a new machine
+make apply   # Apply changes to your home directory
+make update  # Pull latest changes from remote and apply
+make diff    # Show pending changes
+make status  # Show status of managed files
+```
+
+## Setup (Manual Steps)
+
+<!-- TODO: Document manual setup steps (e.g. Touch ID, SSH keys, etc.) -->
+
+## Troubleshooting
+
+<!-- TODO: Document common issues and their solutions -->
